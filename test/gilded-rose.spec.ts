@@ -1,4 +1,4 @@
-import {Item, GildedRose, AgedBrie} from '@/gilded-rose';
+import {Item, GildedRose, AgedBrie, LegendaryItem} from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
     it('should decrease quality and sellIn', () => {
@@ -27,5 +27,19 @@ describe('Gilded Rose', () => {
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(4);
         expect(items[0].quality).toBe(6);
+    });
+
+    it('The quality of an item can never be over 50', () => {
+        const gildedRose = new GildedRose([new AgedBrie(5, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(4);
+        expect(items[0].quality).toBe(50);
+    });
+
+    it('Legendary Items never has to be sold or decreases in quality', () => {
+        const gildedRose = new GildedRose([new LegendaryItem(5, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(5);
+        expect(items[0].quality).toBe(50);
     });
 });
