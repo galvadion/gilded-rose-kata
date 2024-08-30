@@ -1,4 +1,4 @@
-import {Item, GildedRose, AgedBrie, LegendaryItem} from '@/gilded-rose';
+import {Item, GildedRose, AgedBrie, LegendaryItem, BackStagePasses} from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
     it('should decrease quality and sellIn', () => {
@@ -41,5 +41,18 @@ describe('Gilded Rose', () => {
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(5);
         expect(items[0].quality).toBe(50);
+    });
+    it('Backstage passes, should increase quality by 2, when sellIn between 5 and 10', () => {
+        const gildedRose = new GildedRose([new BackStagePasses(7, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(6);
+        expect(items[0].quality).toBe(12);
+    });
+
+    it('Backstage passes, should increase quality by 3, when sellIn between 1 and 5', () => {
+        const gildedRose = new GildedRose([new BackStagePasses(5, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(4);
+        expect(items[0].quality).toBe(13);
     });
 });

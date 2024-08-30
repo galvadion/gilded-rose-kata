@@ -11,7 +11,8 @@ export class Item {
 
     updateQuality(){
         if(this.quality>0)
-            this.quality--;
+            if(this.sellIn < 11)
+                this.quality--;
     }
     updateSellIn(){
         this.sellIn--;
@@ -24,6 +25,16 @@ export class AgedBrie extends Item {
     }
     updateQuality() {
         this.quality++;
+    }
+}
+
+export class BackStagePasses extends Item {
+    constructor(sellIn,quality) {
+        super("Backstage passes to a TAFKAL80ETC concert",sellIn,quality);
+    }
+    updateQuality() {
+        if(this.quality <50)
+            this.quality++;
     }
 }
 
@@ -52,11 +63,7 @@ export class GildedRose {
                 if (this.items[i].quality < 50) {
                     this.items[i].updateQuality()
                     if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
+                        this.items[i].updateQuality()
                         if (this.items[i].sellIn < 6) {
                             if (this.items[i].quality < 50) {
                                 this.items[i].quality = this.items[i].quality + 1
