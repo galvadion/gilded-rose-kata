@@ -11,8 +11,7 @@ export class Item {
 
     updateQuality(){
         if(this.quality>0)
-            if(this.sellIn < 11)
-                this.quality--;
+            this.quality--;
     }
     updateSellIn(){
         this.sellIn--;
@@ -24,7 +23,8 @@ export class AgedBrie extends Item {
         super("Aged Brie",sellIn,quality);
     }
     updateQuality() {
-        this.quality++;
+        if(this.quality <50)
+            this.quality++;
     }
 }
 
@@ -34,7 +34,10 @@ export class BackStagePasses extends Item {
     }
     updateQuality() {
         if(this.quality <50)
-            this.quality++;
+            if(this.sellIn >= 6 && this.sellIn < 11)
+                this.quality += 2;
+            else if(this.sellIn < 6)
+                this.quality += 3;
     }
 }
 
@@ -57,21 +60,7 @@ export class GildedRose {
 
     updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                this.items[i].updateQuality()
-            } else {
-                if (this.items[i].quality < 50) {
-                    this.items[i].updateQuality()
-                    if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        this.items[i].updateQuality()
-                        if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                    }
-                }
-            }
+            this.items[i].updateQuality()
             this.items[i].updateSellIn();
             if (this.items[i].sellIn < 0) {
                 if (this.items[i].name != 'Aged Brie') {
