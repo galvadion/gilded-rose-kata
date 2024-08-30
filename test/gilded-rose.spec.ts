@@ -1,4 +1,4 @@
-import { Item, GildedRose } from '@/gilded-rose';
+import {Item, GildedRose, AgedBrie} from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
     it('should decrease quality and sellIn', () => {
@@ -20,5 +20,12 @@ describe('Gilded Rose', () => {
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(-1);
         expect(items[0].quality).toBe(0);
+    });
+
+    it('given aged brie quality should increase by one', () => {
+        const gildedRose = new GildedRose([new AgedBrie(5, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(4);
+        expect(items[0].quality).toBe(6);
     });
 });
