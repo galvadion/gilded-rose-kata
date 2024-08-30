@@ -14,4 +14,11 @@ describe('Gilded Rose', () => {
         expect(items[0].sellIn).toBe(-1);
         expect(items[0].quality).toBe(18);
     });
+
+    it('given quality is zero, it should not decrease below zero', () => {
+        const gildedRose = new GildedRose([new Item('random item', 0, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(-1);
+        expect(items[0].quality).toBe(0);
+    });
 });
