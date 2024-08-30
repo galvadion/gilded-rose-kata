@@ -29,6 +29,13 @@ describe('Gilded Rose', () => {
         expect(items[0].quality).toBe(6);
     });
 
+    it('given aged brie sellIn past 0, quality should increase by two', () => {
+        const gildedRose = new GildedRose([new AgedBrie(-1, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(-2);
+        expect(items[0].quality).toBe(7);
+    });
+
     it('The quality of an item can never be over 50', () => {
         const gildedRose = new GildedRose([new AgedBrie(5, 50)]);
         const items = gildedRose.updateQuality();
@@ -54,5 +61,12 @@ describe('Gilded Rose', () => {
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(4);
         expect(items[0].quality).toBe(13);
+    });
+
+    it('Backstage passes, should drop quality to 0, when sellIn less than 0', () => {
+        const gildedRose = new GildedRose([new BackStagePasses(0, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(-1);
+        expect(items[0].quality).toBe(0);
     });
 });
