@@ -12,6 +12,9 @@ export class Item {
     updateQuality(){
         this.quality--;
     }
+    updateSellIn(){
+        this.sellIn--;
+    }
 }
 
 export class GildedRose {
@@ -47,7 +50,7 @@ export class GildedRose {
                 }
             }
             if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
+                this.items[i].updateSellIn();
             }
             if (this.items[i].sellIn < 0) {
                 if (this.items[i].name != 'Aged Brie') {
