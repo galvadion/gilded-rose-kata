@@ -18,6 +18,16 @@ export class Item {
     }
 }
 
+export class ConjuredItem extends Item {
+    constructor(sellIn,quality) {
+        super("Conjured item",sellIn,quality);
+    }
+    updateQuality() {
+        if(this.quality <50)
+            this.quality -=2;
+    }
+}
+
 export class AgedBrie extends Item {
     constructor(sellIn,quality) {
         super("Aged Brie",sellIn,quality);
