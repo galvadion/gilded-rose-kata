@@ -8,6 +8,10 @@ export class Item {
         this.sellIn = sellIn;
         this.quality = quality;
     }
+
+    updateQuality(){
+        this.quality--;
+    }
 }
 
 export class GildedRose {
@@ -50,7 +54,7 @@ export class GildedRose {
                     if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
                         if (this.items[i].quality > 0) {
                             if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
+                                this.items[i].updateQuality()
                             }
                         }
                     } else {
